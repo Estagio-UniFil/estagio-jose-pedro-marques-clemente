@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Lista de Produtos</h1>
+
+{% if perms.estoque.acesso_total %}
+<a href="{% url 'produto-create' %}" class="btn btn-primary">Novo Produto</a>
+{% endif %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for produto in produtos %}
+        <tr>
+            <td>{{ produto.nome }}</td>
+            <td>{{ produto.descricao|truncatechars:50 }}</td>
+            <td>{{ produto.categoria|default:"-" }}</td>
+            <td>
+                <a href="{% url 'produto-detail' produto.pk %}" class="btn btn-info btn-sm">Ver</a>
+                {% if perms.estoque.acesso_total %}
+                <a href="{% url 'produto-update' produto.pk %}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{% url 'produto-delete' produto.pk %}" class="btn btn-danger btn-sm">Excluir</a>
+                <a href="{% url 'item-create' produto.pk %}" class="btn btn-success btn-sm">Adicionar Item</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

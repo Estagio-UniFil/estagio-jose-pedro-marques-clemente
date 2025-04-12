@@ -1,0 +1,60 @@
+{% extends "usuario/card.html" %}
+{% load static %}
+
+{% block content %}
+    <h2 class="text-center mb-4">Criar Nova Conta</h2>
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label for="id_username" class="form-label">Nome de Usuário</label>
+            <input type="text" name="username" class="form-control" id="id_username" required>
+            <div class="form-text">Obrigatório. 150 caracteres ou menos. Letras, números e @/./+/-/_ apenas.</div>
+        </div>
+        
+        <div class="mb-3">
+            <label for="id_first_name" class="form-label">Nome</label>
+            <input type="text" name="first_name" class="form-control" id="id_first_name" required>
+        </div>
+        
+        <div class="mb-3">
+            <label for="id_last_name" class="form-label">Sobrenome</label>
+            <input type="text" name="last_name" class="form-control" id="id_last_name" required>
+        </div>
+        
+        <div class="mb-3">
+            <label for="id_email" class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" id="id_email" required>
+        </div>
+        
+        <div class="mb-3">
+            <label for="id_password1" class="form-label">Senha</label>
+            <div class="pwd-group">
+                <input type="password" name="password" class="form-control" id="id_password" required>
+                <button id="toggle_btn" type="button">
+                    <i class="fa fa-eye"></i>
+                </button>
+            </div>
+            <div class="form-text">
+                <ul>
+                    <li>Sua senha não pode ser muito parecida com suas outras informações pessoais.</li>
+                    <li>Sua senha precisa conter pelo menos 8 caracteres.</li>
+                    <li>Sua senha não pode ser uma senha comumente utilizada.</li>
+                    <li>Sua senha não pode ser inteiramente numérica.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="mb-3">
+            <label for="id_password2" class="form-label">Confirmação de Senha</label>
+            <input type="password" name="password2" class="form-control" id="id_password2" required>
+            <div class="form-text">Digite a mesma senha informada anteriormente, para verificação.</div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary w-100">Registrar</button>
+    </form>
+    
+    <div class="mt-3 text-center">
+        <p>Já tem uma conta? <a href="{% url 'login' %}" class="text-decoration-none">Faça login</a></p>
+    </div>
+{% endblock %}

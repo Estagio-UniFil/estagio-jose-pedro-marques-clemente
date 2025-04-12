@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% if object %}Editar{% else %}Novo{% endif %} Item</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a href="{% url 'produto-detail' object.produto.pk|default:form.initial.produto %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
